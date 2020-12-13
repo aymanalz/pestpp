@@ -2591,6 +2591,16 @@ void Pest::child_pest_update(int icycle)
 
 	//pestpp_options
 	//base_par_transform
+	//TODO: too diffuclt to change
+	vector<Transformation*> ct2act = base_par_transform.get_ctl2active_ctl_tranformations();
+	for (auto tr : ct2act)
+	{
+	//tr->clone
+	//	continue;
+	}
+	//ParamTransformSeq* base_trans_seq11 = new Pest(base_par_transform);
+	//ParamTransformSeq base_trans_seq11=base_par_transform;
+
 	//ctl_ordered_par_names
 	ctl_ordered_par_names = parnames;
 	

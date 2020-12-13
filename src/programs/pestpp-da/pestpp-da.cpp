@@ -398,14 +398,22 @@ int main(int argc, char* argv[])
 			Parameters par1 = childPest.get_ctl_parameters();
 			base_trans_seq.ctl2numeric_ip(par1);
 			base_trans_seq.numeric2model_ip(par1);
-			ParameterInfo pi = childPest.get_ctl_parameter_info();
+			ParameterInfo pi = pest_scenario.get_ctl_parameter_info();//I change this as well TODO use pest_scenrio instead of child
 
 			int nadj_par = 0;
 			for (auto par : par1)
+
 			{
-				if ((pi.get_parameter_rec_ptr(par.first)->tranform_type != ParameterRec::TRAN_TYPE::FIXED) &&
-					(pi.get_parameter_rec_ptr(par.first)->tranform_type != ParameterRec::TRAN_TYPE::TIED))
-					nadj_par++;
+				// ayman:  base_trans_seq above was copied from parentpest without any changes; the following statement temporarly fix
+				// the issue; permenat solution should occur during the creation of childpest
+				if ((pi.get_parameter_rec_ptr(par.first)->cycle != *icycle) &&
+					(pi.get_parameter_rec_ptr(par.first)->cycle >= 0))
+				{
+
+					if ((pi.get_parameter_rec_ptr(par.first)->tranform_type != ParameterRec::TRAN_TYPE::FIXED) &&
+						(pi.get_parameter_rec_ptr(par.first)->tranform_type != ParameterRec::TRAN_TYPE::TIED))
+						nadj_par++;
+				}
 
 			}
 
